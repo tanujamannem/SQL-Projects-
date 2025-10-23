@@ -28,17 +28,17 @@ INSERT INTO employees (emp_id, emp_name, department, salary, hire_date) VALUES
 --  ORDER BY Examples
 -- ============================================
 
--- 1?. Sort all employees by salary (ascending)
+-- 1. Sort all employees by salary (ascending)
 SELECT emp_name, department, salary
 FROM employees
 ORDER BY salary ASC;
 
--- 2?. Sort employees by salary (descending)
+-- 2. Sort employees by salary (descending)
 SELECT emp_name, department, salary
 FROM employees
 ORDER BY salary DESC;
 
--- 3?. Sort by multiple columns (first department, then salary descending)
+-- 3. Sort by multiple columns (first department, then salary descending)
 SELECT emp_name, department, salary
 FROM employees
 ORDER BY department ASC, salary DESC;
@@ -47,17 +47,17 @@ ORDER BY department ASC, salary DESC;
 --  TOP and OFFSET FETCH Examples
 -- ============================================
 
--- 4?. Display top 3 highest-paid employees
+-- 4. Display top 3 highest-paid employees
 SELECT TOP 3 emp_name, department, salary
 FROM employees
 ORDER BY salary DESC;
 
--- 5?. Display the 2 lowest-paid employees
+-- 5. Display the 2 lowest-paid employees
 SELECT TOP 2 emp_name, department, salary
 FROM employees
 ORDER BY salary ASC;
 
--- 6?. Skip first 2 and fetch next 3 (OFFSET FETCH style)
+-- 6. Skip first 2 and fetch next 3 (OFFSET FETCH style)
 SELECT emp_name, department, salary
 FROM employees
 ORDER BY salary DESC
@@ -72,3 +72,4 @@ SELECT TOP 2 emp_name, department, salary
 FROM employees
 WHERE department = 'IT'
 ORDER BY salary DESC;
+
