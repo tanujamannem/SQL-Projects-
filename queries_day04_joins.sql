@@ -47,12 +47,12 @@ INSERT INTO employees (emp_id, emp_name, salary, dept_id, manager_id) VALUES
 --  INNER JOIN
 -- ============================================
 
--- 1?. Combine employee and department details
+-- 1. Combine employee and department details
 SELECT e.emp_name, e.salary, d.dept_name
 FROM employees e
 INNER JOIN departments d ON e.dept_id = d.dept_id;
 
--- 2?. Employees earning above 50k with department name
+-- 2. Employees earning above 50k with department name
 SELECT e.emp_name, e.salary, d.dept_name
 FROM employees e
 INNER JOIN departments d ON e.dept_id = d.dept_id
@@ -62,7 +62,7 @@ WHERE e.salary > 50000;
 --  LEFT JOIN
 -- ============================================
 
--- 3?. Show all employees even if they don’t belong to a department
+-- 3. Show all employees even if they donâ€™t belong to a department
 SELECT e.emp_name, d.dept_name
 FROM employees e
 LEFT JOIN departments d ON e.dept_id = d.dept_id;
@@ -71,7 +71,7 @@ LEFT JOIN departments d ON e.dept_id = d.dept_id;
 --  RIGHT JOIN
 -- ============================================
 
--- 4?. Show all departments even if no employees are assigned
+-- 4. Show all departments even if no employees are assigned
 SELECT e.emp_name, d.dept_name
 FROM employees e
 RIGHT JOIN departments d ON e.dept_id = d.dept_id;
@@ -80,7 +80,7 @@ RIGHT JOIN departments d ON e.dept_id = d.dept_id;
 --  FULL OUTER JOIN
 -- ============================================
 
--- 5?. Combine all employees and departments (even without matches)
+-- 5. Combine all employees and departments (even without matches)
 SELECT e.emp_name, d.dept_name
 FROM employees e
 FULL OUTER JOIN departments d ON e.dept_id = d.dept_id;
@@ -89,7 +89,7 @@ FULL OUTER JOIN departments d ON e.dept_id = d.dept_id;
 --  SELF JOIN
 -- ============================================
 
--- 6?. Show employees with their manager names
+-- 6. Show employees with their manager names
 SELECT e.emp_name AS Employee, m.emp_name AS Manager
 FROM employees e
 LEFT JOIN employees m ON e.manager_id = m.emp_id;
@@ -98,7 +98,7 @@ LEFT JOIN employees m ON e.manager_id = m.emp_id;
 --  CROSS JOIN
 -- ============================================
 
--- 7?. Show every possible combination of employee and department
+-- 7. Show every possible combination of employee and department
 SELECT e.emp_name, d.dept_name
 FROM employees e
 CROSS JOIN departments d;
@@ -113,7 +113,7 @@ FROM departments d
 LEFT JOIN employees e ON d.dept_id = e.dept_id
 WHERE e.emp_id IS NULL;
 
---  Find employees who don’t have a department assigned
+--  Find employees who donâ€™t have a department assigned
 SELECT emp_name
 FROM employees
 WHERE dept_id IS NULL;
@@ -123,3 +123,4 @@ SELECT m.emp_name AS Manager, COUNT(e.emp_id) AS Team_Size
 FROM employees e
 INNER JOIN employees m ON e.manager_id = m.emp_id
 GROUP BY m.emp_name;
+
