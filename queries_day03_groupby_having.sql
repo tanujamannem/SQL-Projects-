@@ -31,27 +31,27 @@ INSERT INTO sales (sale_id, region, product, quantity, price, sale_date) VALUES
 --  GROUP BY Examples
 -- ============================================
 
--- 1?. Total quantity sold by region
+-- 1. Total quantity sold by region
 SELECT region, SUM(quantity) AS total_quantity
 FROM sales
 GROUP BY region;
 
--- 2?. Total revenue (quantity * price) per region
+-- 2. Total revenue (quantity * price) per region
 SELECT region, SUM(quantity * price) AS total_revenue
 FROM sales
 GROUP BY region;
 
--- 3?. Total quantity sold per product
+-- 3. Total quantity sold per product
 SELECT product, SUM(quantity) AS total_sold
 FROM sales
 GROUP BY product;
 
--- 4?. Count of sales per region
+-- 4. Count of sales per region
 SELECT region, COUNT(*) AS total_sales
 FROM sales
 GROUP BY region;
 
--- 5?. Average price per product
+-- 5. Average price per product
 SELECT product, AVG(price) AS avg_price
 FROM sales
 GROUP BY product;
@@ -60,19 +60,19 @@ GROUP BY product;
 --  HAVING Clause Examples
 -- ============================================
 
--- 6?. Show regions where total quantity sold > 15
+-- 6. Show regions where total quantity sold > 15
 SELECT region, SUM(quantity) AS total_quantity
 FROM sales
 GROUP BY region
 HAVING SUM(quantity) > 15;
 
--- 7?. Show products where average price > 20000
+-- 7. Show products where average price > 20000
 SELECT product, AVG(price) AS avg_price
 FROM sales
 GROUP BY product
 HAVING AVG(price) > 20000;
 
--- 8?. Show regions with more than 2 products sold
+-- 8. Show regions with more than 2 products sold
 SELECT region, COUNT(DISTINCT product) AS product_count
 FROM sales
 GROUP BY region
@@ -82,7 +82,7 @@ HAVING COUNT(DISTINCT product) > 2;
 --  GROUP BY + ORDER BY
 -- ============================================
 
--- 9?. Order total revenue per region (descending)
+-- 9. Order total revenue per region (descending)
 SELECT region, SUM(quantity * price) AS total_revenue
 FROM sales
 GROUP BY region
@@ -103,3 +103,4 @@ SELECT product, SUM(quantity * price) AS total_revenue
 FROM sales
 GROUP BY product
 HAVING SUM(quantity * price) > 300000;
+
