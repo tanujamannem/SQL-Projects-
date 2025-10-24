@@ -1,8 +1,55 @@
--- ============================================
---  Topic: GROUP BY, HAVING
---  Day 3 - SQL Basics
---  Focus: Aggregation and Filtering Groups (SQL Server)
--- ============================================
+-- =====================================================================================
+-- Topic: GROUP BY, HAVING
+-- Author: Tanuja Mannem
+-- Day: 3 - SQL Basics
+-- Description: Aggregation and filtering groups using GROUP BY and HAVING in SQL Server
+-- =====================================================================================
+
+-- ================================= THEORY ============================================
+-- 1. GROUP BY Clause:
+--    - Used to group rows that have the same values in specified columns.
+--    - Often used with aggregate functions: SUM, COUNT, AVG, MAX, MIN.
+--    - Syntax:
+--         SELECT column1, aggregate_function(column2)
+--         FROM table_name
+--         GROUP BY column1;
+--    - Examples of aggregate functions:
+--         SUM(column)   → total sum
+--         COUNT(*)      → number of rows
+--         AVG(column)   → average value
+--         MAX(column)   → maximum value
+--         MIN(column)   → minimum value
+
+-- 2. HAVING Clause:
+--    - Used to filter groups created by GROUP BY.
+--    - Similar to WHERE, but WHERE cannot filter aggregates.
+--    - Syntax:
+--         SELECT column1, aggregate_function(column2)
+--         FROM table_name
+--         GROUP BY column1
+--         HAVING aggregate_function(column2) condition;
+--    - Example:
+--         SELECT region, SUM(quantity) AS total_quantity
+--         FROM sales
+--         GROUP BY region
+--         HAVING SUM(quantity) > 15;
+
+-- 3. ORDER BY with GROUP BY:
+--    - You can order the grouped results using ORDER BY.
+--    - Syntax:
+--         SELECT column1, aggregate_function(column2)
+--         FROM table_name
+--         GROUP BY column1
+--         ORDER BY aggregate_function(column2) DESC;
+
+-- 4. Key Points:
+--    - GROUP BY groups rows by specified column(s).
+--    - HAVING filters groups, while WHERE filters individual rows.
+--    - Aggregate functions are usually used with GROUP BY to summarize data.
+--    - Combining GROUP BY + ORDER BY is common to rank or sort results.
+
+-- =====================================================================================
+-- ================================= CODE ==============================================
 
 -- Create sample table
 CREATE TABLE sales (
@@ -103,4 +150,5 @@ SELECT product, SUM(quantity * price) AS total_revenue
 FROM sales
 GROUP BY product
 HAVING SUM(quantity * price) > 300000;
+
 
