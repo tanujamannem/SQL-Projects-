@@ -1,8 +1,66 @@
--- ============================================
---  Topic: Subqueries
---  Day 5 - SQL Basics
---  Focus: Nested queries (IN, EXISTS, ANY, ALL)
--- ============================================
+-- =====================================================================================
+-- Topic: Subqueries
+-- Author: Tanuja Mannem
+-- Day: 5 - SQL Basics
+-- Description: Using nested queries (IN, EXISTS, ANY, ALL, correlated) in SQL Server
+-- =====================================================================================
+
+-- ================================= THEORY ============================================
+-- 1. Subquery Overview:
+--    - A subquery (nested query) is a query inside another query.
+--    - Can return a single value, a list of values, or a table.
+--    - Common uses: filtering, calculating aggregates, comparing values.
+
+-- 2. Subquery in WHERE Clause:
+--    - Filters results based on the result of another query.
+--    - Syntax:
+--         SELECT columns
+--         FROM table
+--         WHERE column > (SELECT ...);
+--    - Example:
+--         SELECT emp_name, salary
+--         FROM employees
+--         WHERE salary > (SELECT AVG(salary) FROM employees);
+
+-- 3. Subquery with IN / NOT IN:
+--    - IN checks if a value exists in a list returned by subquery.
+--    - NOT IN checks if a value does not exist in the list.
+--    - Example:
+--         SELECT emp_name
+--         FROM employees
+--         WHERE dept_id IN (SELECT dept_id FROM departments WHERE dept_name = 'IT');
+
+-- 4. Subquery with EXISTS / NOT EXISTS:
+--    - EXISTS returns TRUE if subquery returns at least one row.
+--    - NOT EXISTS returns TRUE if subquery returns no rows.
+--    - Example:
+--         SELECT dept_name
+--         FROM departments d
+--         WHERE EXISTS (SELECT 1 FROM employees e WHERE e.dept_id = d.dept_id);
+
+-- 5. Correlated Subquery:
+--    - Subquery that references a column from the outer query.
+--    - Evaluated for each row of the outer query.
+--    - Example:
+--         SELECT e.emp_name
+--         FROM employees e
+--         WHERE e.salary > (SELECT AVG(salary) FROM employees sub WHERE sub.dept_id = e.dept_id);
+
+-- 6. Subquery with ANY / ALL:
+--    - ANY → TRUE if comparison is TRUE for any value returned by subquery.
+--    - ALL → TRUE if comparison is TRUE for all values returned by subquery.
+--    - Example:
+--         SELECT emp_name
+--         FROM employees
+--         WHERE salary > ANY (SELECT salary FROM employees WHERE dept_id = 1);
+
+-- 7. Key Points:
+--    - Subqueries can be used in SELECT, FROM, WHERE, and HAVING clauses.
+--    - Correlated subqueries run once per row of the outer query.
+--    - Use subqueries to handle complex filtering and aggregation.
+
+-- =====================================================================================
+-- ================================= CODE ==============================================
 
 -- Drop and recreate for clean start
 DROP TABLE IF EXISTS employees;
@@ -117,5 +175,6 @@ WHERE dept_id IN (
     GROUP BY dept_id
     HAVING AVG(salary) > 50000
 );
+
 
 
