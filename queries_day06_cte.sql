@@ -1,8 +1,42 @@
--- ============================================
---  Topic: Common Table Expressions (CTE)
---  Day 6 - Intermediate SQL
---  Focus: Reusable query blocks, simplifying subqueries
--- ============================================
+-- =====================================================================================
+-- Topic: Common Table Expressions (CTE)
+-- Author: Tanuja Mannem
+-- Day: 6 - Intermediate SQL
+-- Description: Using CTEs to simplify queries, create reusable blocks, and build recursive queries
+-- =====================================================================================
+
+-- ================================= THEORY ============================================
+-- 1. What is a CTE (Common Table Expression)?
+--    - A CTE is a temporary result set that can be referenced within a SELECT, INSERT, UPDATE, or DELETE statement.
+--    - Improves readability and modularity of queries.
+--    - Defined using the WITH keyword.
+--    - Syntax:
+--         WITH CTE_Name AS (
+--             SELECT ...
+--         )
+--         SELECT ... FROM CTE_Name;
+
+-- 2. Benefits of CTEs:
+--    - Simplifies complex subqueries.
+--    - Can be reused multiple times in the main query.
+--    - Supports recursive queries for hierarchical data.
+
+-- 3. Recursive CTE:
+--    - A CTE that references itself to handle hierarchical or iterative data.
+--    - Requires a base query (anchor member) and a recursive query (recursive member) combined using UNION ALL.
+--    - Example use case: Employee-manager hierarchy.
+
+-- 4. CTE with Ranking:
+--    - CTEs can be combined with window functions like ROW_NUMBER(), RANK(), DENSE_RANK().
+--    - Useful for finding top-N records, partitions, or ranked data.
+
+-- 5. Key Points:
+--    - CTE exists only during the execution of the query.
+--    - Multiple CTEs can be chained together by separating them with commas.
+--    - Recursive CTEs must have a termination condition to prevent infinite loops.
+
+-- =====================================================================================
+-- ================================= CODE ==============================================
 
 -- Drop and recreate for clean start
 DROP TABLE IF EXISTS employees;
@@ -126,3 +160,4 @@ WITH AvgSal AS (
 SELECT emp_name, salary
 FROM employees, AvgSal
 WHERE salary > avg_salary;
+
