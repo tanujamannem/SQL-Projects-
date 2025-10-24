@@ -1,8 +1,53 @@
--- ============================================
---  Topic: SQL JOINS
---  Day 4 - SQL Basics
---  Focus: INNER, LEFT, RIGHT, FULL, SELF, CROSS JOIN
--- ============================================
+-- =====================================================================================
+-- Topic: SQL JOINS
+-- Author: Tanuja Mannem
+-- Day: 4 - SQL Basics
+-- Description: Understanding and using INNER, LEFT, RIGHT, FULL, SELF, and CROSS JOINs
+-- =====================================================================================
+
+-- ================================= THEORY ============================================
+-- 1. JOINs Overview:
+--    - JOINs combine rows from two or more tables based on a related column.
+--    - Common types in SQL Server:
+--        a) INNER JOIN   → Returns only matching rows in both tables.
+--        b) LEFT JOIN    → Returns all rows from the left table, and matched rows from right table; NULL if no match.
+--        c) RIGHT JOIN   → Returns all rows from the right table, and matched rows from left table; NULL if no match.
+--        d) FULL OUTER JOIN → Returns all rows when there is a match in one of the tables.
+--        e) SELF JOIN    → Joins a table to itself.
+--        f) CROSS JOIN   → Returns Cartesian product (all possible combinations of rows).
+
+-- 2. INNER JOIN:
+--    - Syntax:
+--         SELECT columns
+--         FROM table1
+--         INNER JOIN table2 ON table1.column = table2.column;
+--    - Only rows with matching values in both tables are returned.
+
+-- 3. LEFT JOIN / RIGHT JOIN:
+--    - LEFT JOIN returns all rows from the left table, even if there is no match in the right table.
+--    - RIGHT JOIN returns all rows from the right table, even if there is no match in the left table.
+--    - Useful for finding unmatched data.
+
+-- 4. FULL OUTER JOIN:
+--    - Combines LEFT JOIN and RIGHT JOIN.
+--    - Returns all rows from both tables; unmatched columns appear as NULL.
+
+-- 5. SELF JOIN:
+--    - A table joined to itself.
+--    - Useful for hierarchical data, like employee-manager relationships.
+
+-- 6. CROSS JOIN:
+--    - Produces all possible combinations of rows between two tables.
+--    - Usually used in reporting or generating combinations.
+
+-- 7. Key Points:
+--    - Always define the join condition (ON clause) to avoid Cartesian products (except CROSS JOIN).
+--    - Use aliases (e.g., e, d) for readability.
+--    - Join order matters for LEFT/RIGHT joins.
+--    - SELF JOIN requires table aliasing to differentiate two instances of the same table.
+
+-- =====================================================================================
+-- ================================= CODE ==============================================
 
 -- Drop if exists (for re-run safety)
 DROP TABLE IF EXISTS employees;
@@ -123,4 +168,5 @@ SELECT m.emp_name AS Manager, COUNT(e.emp_id) AS Team_Size
 FROM employees e
 INNER JOIN employees m ON e.manager_id = m.emp_id
 GROUP BY m.emp_name;
+
 
