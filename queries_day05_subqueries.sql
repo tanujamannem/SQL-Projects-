@@ -96,7 +96,7 @@ INSERT INTO employees (emp_id, emp_name, salary, dept_id, manager_id) VALUES
 (107, 'Gauri', 35000, 2, 103);
 
 -- ============================================
---  1. Subquery in WHERE clause
+--  1. Subquery in WHERE clause : Write a query to display the names and salaries of employees who earn more than the average salary of all employees.
 -- ============================================
 
 SELECT emp_name, salary
@@ -104,7 +104,7 @@ FROM employees
 WHERE salary > (SELECT AVG(salary) FROM employees);
 
 -- ============================================
---  2. Subquery with IN
+--  2. Subquery with IN : Write a query to find the names and department IDs of employees who work in departments named ‘IT’ or ‘Finance’.
 -- ============================================
 
 SELECT emp_name, dept_id
@@ -112,7 +112,7 @@ FROM employees
 WHERE dept_id IN (SELECT dept_id FROM departments WHERE dept_name IN ('IT', 'Finance'));
 
 -- ============================================
---  3. Subquery with EXISTS
+--  3. Subquery with EXISTS : Write a query to display the names of all departments that have at least one employee working in them.
 -- ============================================
 
 SELECT dept_name
@@ -120,7 +120,7 @@ FROM departments d
 WHERE EXISTS (SELECT 1 FROM employees e WHERE e.dept_id = d.dept_id);
 
 -- ============================================
---  4. Subquery with NOT EXISTS
+--  4. Subquery with NOT EXISTS : Write a query to display the names of departments that do not have any employees.
 -- ============================================
 
 SELECT dept_name
@@ -128,7 +128,7 @@ FROM departments d
 WHERE NOT EXISTS (SELECT 1 FROM employees e WHERE e.dept_id = d.dept_id);
 
 -- ============================================
---  5. Correlated Subquery
+--  5. Correlated Subquery : Write a query to display the employee name, salary, and department ID for employees who earn more than the average salary of their respective department.
 -- ============================================
 
 SELECT e.emp_name, e.salary, e.dept_id
@@ -143,10 +143,12 @@ WHERE e.salary > (
 --  6. Subquery with ANY / ALL
 -- ============================================
 
+-- 1. Write a query to display the names and salaries of employees whose salary is greater than any employee working in department 1.
 SELECT emp_name, salary
 FROM employees
 WHERE salary > ANY (SELECT salary FROM employees WHERE dept_id = 1);
 
+-- 2. Write a query to display the names and salaries of employees whose salary is greater than all employees working in department 1.
 SELECT emp_name, salary
 FROM employees
 WHERE salary > ALL (SELECT salary FROM employees WHERE dept_id = 1);
@@ -175,6 +177,7 @@ WHERE dept_id IN (
     GROUP BY dept_id
     HAVING AVG(salary) > 50000
 );
+
 
 
 
