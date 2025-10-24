@@ -1,8 +1,39 @@
--- ============================================
---  Topic: Window Functions
---  Day 7 - Intermediate SQL
---  Focus: Ranking, partitioning, cumulative totals
--- ============================================
+-- =====================================================================================
+-- Topic: Window Functions
+-- Author: Tanuja Mannem
+-- Day: 7 - Intermediate SQL
+-- Description: Using window functions for ranking, partitioning, and cumulative calculations
+-- =====================================================================================
+
+-- ================================= THEORY ============================================
+-- 1. What are Window Functions?
+--    - Window functions perform calculations across a set of rows related to the current row.
+--    - Unlike aggregate functions, they do not collapse rows; all original rows are preserved.
+--    - Syntax: 
+--         function_name(...) OVER ([PARTITION BY column] [ORDER BY column])
+
+-- 2. Common Window Functions:
+--    a) ROW_NUMBER() → Assigns a unique sequential number to rows within a partition.
+--    b) RANK() → Assigns rank, same values get same rank; skips numbers after ties.
+--    c) DENSE_RANK() → Same as RANK() but does not skip numbers after ties.
+--    d) NTILE(n) → Divides rows into n equal groups (quartiles, deciles, etc.).
+--    e) SUM() OVER() → Running or cumulative totals.
+--    f) AVG() OVER() → Calculates average over a partition or entire dataset.
+
+-- 3. PARTITION BY:
+--    - Divides the dataset into groups (like GROUP BY but does not collapse rows).
+--    - Useful for ranking or aggregation per group.
+
+-- 4. ORDER BY within OVER():
+--    - Determines the order for ranking or cumulative calculations.
+
+-- 5. Key Points:
+--    - Window functions are evaluated after WHERE but before ORDER BY.
+--    - Can be combined with CTEs for top-N queries per group.
+--    - Preserve all rows while providing aggregated or ranked information.
+
+-- =====================================================================================
+-- ================================= CODE ==============================================
 
 -- Drop and recreate for clean start
 DROP TABLE IF EXISTS sales;
@@ -92,7 +123,7 @@ SELECT * FROM RankedSales WHERE rnk <= 2;
 --  Challenge Queries
 -- ============================================
 
---  1. Find each employee�s sales rank across all regions.
+--  1. Find each employee’s sales rank across all regions.
 SELECT emp_name, sale_amount,
        RANK() OVER(ORDER BY sale_amount DESC) AS overall_rank
 FROM sales;
@@ -111,3 +142,4 @@ FROM (
     FROM sales
 ) t
 WHERE rnk <= 3;
+
