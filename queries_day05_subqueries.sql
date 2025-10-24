@@ -38,7 +38,7 @@ INSERT INTO employees (emp_id, emp_name, salary, dept_id, manager_id) VALUES
 (107, 'Gauri', 35000, 2, 103);
 
 -- ============================================
---  1?. Subquery in WHERE clause
+--  1. Subquery in WHERE clause
 -- ============================================
 
 SELECT emp_name, salary
@@ -46,7 +46,7 @@ FROM employees
 WHERE salary > (SELECT AVG(salary) FROM employees);
 
 -- ============================================
---  2?. Subquery with IN
+--  2. Subquery with IN
 -- ============================================
 
 SELECT emp_name, dept_id
@@ -54,7 +54,7 @@ FROM employees
 WHERE dept_id IN (SELECT dept_id FROM departments WHERE dept_name IN ('IT', 'Finance'));
 
 -- ============================================
---  3?. Subquery with EXISTS
+--  3. Subquery with EXISTS
 -- ============================================
 
 SELECT dept_name
@@ -62,7 +62,7 @@ FROM departments d
 WHERE EXISTS (SELECT 1 FROM employees e WHERE e.dept_id = d.dept_id);
 
 -- ============================================
---  4?. Subquery with NOT EXISTS
+--  4. Subquery with NOT EXISTS
 -- ============================================
 
 SELECT dept_name
@@ -70,7 +70,7 @@ FROM departments d
 WHERE NOT EXISTS (SELECT 1 FROM employees e WHERE e.dept_id = d.dept_id);
 
 -- ============================================
---  5?. Correlated Subquery
+--  5. Correlated Subquery
 -- ============================================
 
 SELECT e.emp_name, e.salary, e.dept_id
@@ -82,7 +82,7 @@ WHERE e.salary > (
 );
 
 -- ============================================
---  6?. Subquery with ANY / ALL
+--  6. Subquery with ANY / ALL
 -- ============================================
 
 SELECT emp_name, salary
@@ -117,4 +117,5 @@ WHERE dept_id IN (
     GROUP BY dept_id
     HAVING AVG(salary) > 50000
 );
+
 
