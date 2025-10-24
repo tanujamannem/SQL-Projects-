@@ -59,7 +59,7 @@ INSERT INTO sales (sale_id, emp_name, region, sale_amount, sale_date) VALUES
 (10, 'Jay', 'West', 8500, '2024-01-03');
 
 -- ============================================
---  1?. ROW_NUMBER() - unique ranking per partition
+--  1. ROW_NUMBER() - unique ranking per partition
 -- ============================================
 
 -- Rank employees in each region by their sales amount
@@ -68,7 +68,7 @@ SELECT emp_name, region, sale_amount,
 FROM sales;
 
 -- ============================================
---  2?. RANK() - allows same rank for ties (skips numbers)
+--  2. RANK() - allows same rank for ties (skips numbers)
 -- ============================================
 
 SELECT emp_name, region, sale_amount,
@@ -76,7 +76,7 @@ SELECT emp_name, region, sale_amount,
 FROM sales;
 
 -- ============================================
---  3?. DENSE_RANK() - same rank for ties (no skip)
+--  3. DENSE_RANK() - same rank for ties (no skip)
 -- ============================================
 
 SELECT emp_name, region, sale_amount,
@@ -84,7 +84,7 @@ SELECT emp_name, region, sale_amount,
 FROM sales;
 
 -- ============================================
---  4?. NTILE() - splits rows into equal groups (quartiles)
+--  4. NTILE() - splits rows into equal groups (quartiles)
 -- ============================================
 
 SELECT emp_name, region, sale_amount,
@@ -92,7 +92,7 @@ SELECT emp_name, region, sale_amount,
 FROM sales;
 
 -- ============================================
---  5?. SUM() OVER() - cumulative total
+--  5. SUM() OVER() - cumulative total
 -- ============================================
 
 SELECT emp_name, region, sale_amount, sale_date,
@@ -100,7 +100,7 @@ SELECT emp_name, region, sale_amount, sale_date,
 FROM sales;
 
 -- ============================================
---  6?. AVG() OVER() with PARTITION BY
+--  6. AVG() OVER() with PARTITION BY
 -- ============================================
 
 SELECT emp_name, region, sale_amount,
@@ -108,7 +108,7 @@ SELECT emp_name, region, sale_amount,
 FROM sales;
 
 -- ============================================
---  7? .Combined Example
+--  7. Combined Example
 -- ============================================
 
 -- Find top 2 salespeople by region
@@ -142,4 +142,5 @@ FROM (
     FROM sales
 ) t
 WHERE rnk <= 3;
+
 
