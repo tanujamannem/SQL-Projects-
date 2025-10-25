@@ -1,7 +1,75 @@
 -- =============================================
---  SQL PRACTICE: DAY 8 � JOINS
--- Covers: INNER, LEFT, RIGHT, FULL, CROSS, SELF JOIN
+--  📘 Topic: SQL JOINS
+--  🗓️ Day 8 – Intermediate SQL
+--  👩‍💻 Author: Tanuja Mannem
+--  🎯 Focus: INNER, LEFT, RIGHT, FULL, CROSS, SELF JOINS
 -- =============================================
+
+/*
+================================================================================
+🧠 THEORY SECTION
+================================================================================
+
+🔹 1. What are JOINS?
+Joins are used to combine rows from two or more tables based on a related column 
+between them. They help fetch data from multiple tables in a single query.
+
+📌 Syntax:
+    SELECT columns
+    FROM table1
+    JOIN table2
+    ON table1.common_column = table2.common_column;
+
+---
+
+🔹 2. Types of Joins:
+
+1️⃣ INNER JOIN  
+   → Returns only the records that have matching values in both tables.  
+   Example: Show only employees who belong to a valid department.
+
+2️⃣ LEFT JOIN  
+   → Returns all rows from the left table (even if no match in right table).  
+   Example: Show all employees and their department (NULL if no department).
+
+3️⃣ RIGHT JOIN  
+   → Returns all rows from the right table, even if no match in left table.  
+   Example: Show all departments and employees (if any).
+
+4️⃣ FULL OUTER JOIN  
+   → Returns all records when there is a match in either table.
+   MySQL doesn’t support FULL JOIN directly — we can simulate it using UNION.
+
+5️⃣ CROSS JOIN  
+   → Produces all possible combinations (Cartesian product).  
+   Example: Every employee with every department.
+
+6️⃣ SELF JOIN  
+   → Joins a table with itself.
+   Example: Compare employees with higher or lower salaries within same table.
+
+---
+
+🔹 3. Why Use Joins?
+✅ Combine data from multiple related tables  
+✅ Avoid data duplication  
+✅ Enable complex reporting and analysis  
+
+---
+
+🔹 4. Common Real-world Example:
+In a company database:
+- `Departments` table stores department names.
+- `Employees` table stores employee details.
+- `Projects` table stores project information.
+
+By using JOINs, you can link them together to show:
+Employee → Department → Project relationships.
+
+================================================================================
+💻 PRACTICE SECTION
+================================================================================
+*/
 
 -- Drop child tables first, then parent
 DROP TABLE IF EXISTS Projects;
@@ -108,3 +176,4 @@ FROM Employees e
 JOIN Departments d ON e.DeptID = d.DeptID
 JOIN Projects p ON d.DeptID = p.DeptID
 ORDER BY d.DeptName;
+
