@@ -71,7 +71,7 @@ INSERT INTO employees (emp_id, emp_name, salary, dept_id, manager_id) VALUES
 (107, 'Gauri', 35000, 1, 104);
 
 -- ============================================
---  1?. Simple CTE example
+--  1. Simple CTE example
 -- ============================================
 
 -- Create a CTE to calculate department-wise average salary
@@ -87,7 +87,7 @@ JOIN DeptAvg a ON e.dept_id = a.dept_id
 WHERE e.salary > a.avg_salary;
 
 -- ============================================
---  2?. CTE replacing subqueries
+--  2. CTE replacing subqueries
 -- ============================================
 
 -- Find top 3 highest-paid employees using a CTE
@@ -101,7 +101,7 @@ FROM EmpRank
 WHERE rn <= 3;
 
 -- ============================================
---  3?. Multiple CTEs in one query
+--  3. Multiple CTEs in one query
 -- ============================================
 
 -- Combine multiple CTEs for better readability
@@ -121,7 +121,7 @@ JOIN DeptCount c ON d.dept_id = c.dept_id
 JOIN DeptAvg a ON d.dept_id = a.dept_id;
 
 -- ============================================
---  4?. Recursive CTE
+--  4. Recursive CTE
 -- ============================================
 
 -- Example: Display employee-manager hierarchy
@@ -160,4 +160,5 @@ WITH AvgSal AS (
 SELECT emp_name, salary
 FROM employees, AvgSal
 WHERE salary > avg_salary;
+
 
