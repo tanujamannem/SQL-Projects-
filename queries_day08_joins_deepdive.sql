@@ -1,20 +1,20 @@
 -- =============================================
---  📘 Topic: SQL JOINS
---  🗓️ Day 8 – Intermediate SQL
---  👩‍💻 Author: Tanuja Mannem
---  🎯 Focus: INNER, LEFT, RIGHT, FULL, CROSS, SELF JOINS
+--   Topic: SQL JOINS
+--   Day 8 – Intermediate SQL
+--   Author: Tanuja Mannem
+--   Focus: INNER, LEFT, RIGHT, FULL, CROSS, SELF JOINS
 -- =============================================
 
 /*
 ================================================================================
-🧠 THEORY SECTION
+ THEORY SECTION
 ================================================================================
 
 🔹 1. What are JOINS?
 Joins are used to combine rows from two or more tables based on a related column 
 between them. They help fetch data from multiple tables in a single query.
 
-📌 Syntax:
+ Syntax:
     SELECT columns
     FROM table1
     JOIN table2
@@ -67,7 +67,7 @@ By using JOINs, you can link them together to show:
 Employee → Department → Project relationships.
 
 ================================================================================
-💻 PRACTICE SECTION
+ PRACTICE SECTION
 ================================================================================
 */
 
@@ -176,4 +176,5 @@ FROM Employees e
 JOIN Departments d ON e.DeptID = d.DeptID
 JOIN Projects p ON d.DeptID = p.DeptID
 ORDER BY d.DeptName;
+
 
