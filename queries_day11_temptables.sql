@@ -1,6 +1,5 @@
 -- =============================================================
--- ?? DAY 12 – TEMPORARY TABLES IN SQL
--- Week 2: Advanced SQL Concepts ? Day 12
+--  DAY 11 â€“ TEMPORARY TABLES IN SQL
 -- Author: Tanuja Mannem
 -- Description:
 --   Learn how to create and use Temporary Tables in SQL.
@@ -8,32 +7,32 @@
 -- =============================================================
 
 -- =============================================================
--- ?? THEORY
+--  THEORY
 -- =============================================================
 
--- ?? What are Temporary Tables?
+--  What are Temporary Tables?
 -- Temporary tables are special tables used to store data temporarily
 -- during a session or transaction. They are useful for holding
 -- intermediate results and simplifying complex queries.
 
 -- Types of Temporary Tables:
--- 1?? Local Temporary Table (#TempTable)
+-- 1. Local Temporary Table (#TempTable)
 --     - Exists only in the current session.
 --     - Automatically dropped when the session ends.
 --     - Name starts with a single # (e.g., #TempEmployees)
 --
--- 2?? Global Temporary Table (##TempTable)
+-- 2. Global Temporary Table (##TempTable)
 --     - Accessible to all sessions.
 --     - Dropped automatically when the last session using it is closed.
 --     - Name starts with double ## (e.g., ##GlobalTemp)
 --
--- ? Syntax:
+--  Syntax:
 --     SELECT columns INTO #TempTable FROM ExistingTable WHERE condition;
 --     OR
 --     CREATE TABLE #TempTable (columns datatype, ...);
 
 -- =============================================================
--- ?? Clean Start
+--  Clean Start
 -- =============================================================
 DROP TABLE IF EXISTS #TempEmployees;
 DROP TABLE IF EXISTS Departments;
@@ -41,7 +40,7 @@ DROP TABLE IF EXISTS Employees;
 GO
 
 -- =============================================================
--- 1?? BASE TABLES
+-- 1. BASE TABLES
 -- =============================================================
 CREATE TABLE Departments (
     DeptID INT PRIMARY KEY,
@@ -71,7 +70,7 @@ INSERT INTO Employees VALUES
 GO
 
 -- =============================================================
--- 2?? LOCAL TEMP TABLE
+-- 2. LOCAL TEMP TABLE
 -- =============================================================
 -- Create a local temp table to store employees earning > 60000
 SELECT EmpID, EmpName, Salary, DeptID
@@ -100,7 +99,7 @@ JOIN Departments d ON t.DeptID = d.DeptID;
 GO
 
 -- =============================================================
--- 3?? GLOBAL TEMP TABLE (Optional)
+-- 3. GLOBAL TEMP TABLE (Optional)
 -- =============================================================
 -- ?? Can be accessed from multiple sessions
 -- SELECT * INTO ##GlobalTemp FROM Employees;
@@ -109,10 +108,10 @@ GO
 GO
 
 -- =============================================================
--- ?? CHALLENGE QUERIES
+--  CHALLENGE QUERIES
 -- =============================================================
 
--- 1?? Create a temp table for employees earning less than 55000
+-- 1. Create a temp table for employees earning less than 55000
 SELECT EmpID, EmpName, Salary, DeptID
 INTO #LowSalary
 FROM Employees
@@ -120,7 +119,7 @@ WHERE Salary < 55000;
 
 SELECT * FROM #LowSalary;
 
--- 2?? Add a new column 'Bonus' to #TempEmployees and update it
+-- 2. Add a new column 'Bonus' to #TempEmployees and update it
 ALTER TABLE #TempEmployees ADD Bonus DECIMAL(10,2);
 
 UPDATE #TempEmployees
@@ -128,7 +127,7 @@ SET Bonus = Salary * 0.10;
 
 SELECT EmpName, Salary, Bonus FROM #TempEmployees;
 
--- 3?? Create another temp table for department-wise average salary
+-- 3. Create another temp table for department-wise average salary
 SELECT DeptID, AVG(Salary) AS AvgSalary
 INTO #DeptSalary
 FROM Employees
@@ -136,21 +135,22 @@ GROUP BY DeptID;
 
 SELECT * FROM #DeptSalary;
 
--- 4?? Join #DeptSalary with Departments
+-- 4. Join #DeptSalary with Departments
 SELECT d.DeptName, s.AvgSalary
 FROM #DeptSalary s
 JOIN Departments d ON s.DeptID = d.DeptID;
 
--- 5?? Drop all temporary tables at the end
+-- 5. Drop all temporary tables at the end
 DROP TABLE IF EXISTS #TempEmployees;
 DROP TABLE IF EXISTS #LowSalary;
 DROP TABLE IF EXISTS #DeptSalary;
 GO
 
 -- =============================================================
--- ? END OF DAY 12
+--  END OF DAY 12
 -- Key Learnings:
 -- - Created and used Local and Global Temporary Tables
 -- - Performed updates, joins, and aggregations on temp tables
 -- - Practiced real-world temp table scenarios
 -- =============================================================
+
