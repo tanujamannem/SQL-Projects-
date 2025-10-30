@@ -1,5 +1,5 @@
 -- =============================================================
---  DAY 11 – VIEWS IN SQL
+--  DAY 13 â€“ VIEWS IN SQL
 --  Author: Tanuja Mannem
 --  Description:
 --      Learn what Views are, how to create, modify, and use them.
@@ -10,18 +10,18 @@
 --  THEORY
 -- =============================================================
 
--- ?? What is a View?
+--  What is a View?
 -- A VIEW is a virtual table that displays data from one or more tables.
--- It does not store data physically — instead, it saves the SQL query.
+-- It does not store data physically â€” instead, it saves the SQL query.
 -- When you query a view, SQL Server executes the underlying query.
 
--- ?? Why use Views?
+--  Why use Views?
 -- - To simplify complex queries
 -- - To restrict access to sensitive data
 -- - To reuse frequently used queries
 -- - To provide data abstraction (hide table structure)
 
--- ?? Syntax:
+-- Syntax:
 -- CREATE VIEW view_name AS
 -- SELECT columns
 -- FROM tables
@@ -30,9 +30,9 @@
 -- To see data from a view:
 -- SELECT * FROM view_name;
 
--- ?? Types of Views:
--- 1. Simple View – based on a single table (can allow DML operations)
--- 2. Complex View – based on multiple tables or with aggregations (read-only)
+-- Types of Views:
+-- 1. Simple View â€“ based on a single table (can allow DML operations)
+-- 2. Complex View â€“ based on multiple tables or with aggregations (read-only)
 
 -- =============================================================
 --  CLEAN START
@@ -90,7 +90,7 @@ GO
 --  EXAMPLES
 -- =============================================================
 
--- 1?? Simple View: Show employee basic details
+-- 1. Simple View: Show employee basic details
 CREATE VIEW vw_EmployeeBasic AS
 SELECT EmpID, EmpName, Salary
 FROM Employees;
@@ -100,7 +100,7 @@ GO
 SELECT * FROM vw_EmployeeBasic;
 GO
 
--- 2?? Simple View: Filtered view (employees earning > 60000)
+-- 2. Simple View: Filtered view (employees earning > 60000)
 CREATE VIEW vw_HighEarners AS
 SELECT EmpName, Salary, DeptID
 FROM Employees
@@ -110,7 +110,7 @@ GO
 SELECT * FROM vw_HighEarners;
 GO
 
--- 3?? Complex View: Join Employees and Departments
+-- 3. Complex View: Join Employees and Departments
 CREATE VIEW vw_EmployeeDept AS
 SELECT e.EmpName, e.Salary, d.DeptName, e.HireDate
 FROM Employees e
@@ -120,7 +120,7 @@ GO
 SELECT * FROM vw_EmployeeDept;
 GO
 
--- 4?? Complex View: Department-wise average salary
+-- 4. Complex View: Department-wise average salary
 CREATE VIEW vw_DeptAvgSalary AS
 SELECT d.DeptName, AVG(e.Salary) AS AvgSalary
 FROM Employees e
@@ -131,7 +131,7 @@ GO
 SELECT * FROM vw_DeptAvgSalary;
 GO
 
--- 5?? Updating data through a simple view
+-- 5. Updating data through a simple view
 UPDATE vw_EmployeeBasic
 SET Salary = Salary + 5000
 WHERE EmpID = 1;
@@ -140,7 +140,7 @@ GO
 SELECT * FROM vw_EmployeeBasic;
 GO
 
--- 6?? Check all views in the database
+-- 6. Check all views in the database
 SELECT name AS ViewName
 FROM sys.views;
 GO
@@ -167,7 +167,7 @@ GO
 --  CHALLENGE QUERIES
 -- =============================================================
 
--- ?? 1. Create a view showing employees who joined after 2021
+--  1. Create a view showing employees who joined after 2021
 CREATE VIEW vw_RecentHires AS
 SELECT EmpName, HireDate, DeptID
 FROM Employees
@@ -177,7 +177,7 @@ GO
 SELECT * FROM vw_RecentHires;
 GO
 
--- ?? 2. Create a complex view showing each department’s highest-paid employee
+--  2. Create a complex view showing each departmentâ€™s highest-paid employee
 CREATE VIEW vw_TopPaidPerDept AS
 SELECT d.DeptName, e.EmpName, e.Salary
 FROM Employees e
@@ -193,9 +193,10 @@ SELECT * FROM vw_TopPaidPerDept;
 GO
 
 -- =============================================================
---  END OF DAY 11
+--  END OF DAY 13
 --  Key Learnings:
 --  - Created and used simple & complex views
 --  - Updated data through simple views
 --  - Learned how to modify and drop views
 -- =============================================================
+
