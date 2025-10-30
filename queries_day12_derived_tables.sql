@@ -1,5 +1,5 @@
 -- =============================================================
---  DAY 12 – DERIVED TABLES (SUBQUERIES IN FROM CLAUSE)
+--  DAY 12 â€“ DERIVED TABLES (SUBQUERIES IN FROM CLAUSE)
 --  Author: Tanuja Mannem
 --  Description:
 --      Learn how to use Derived Tables in SQL.
@@ -10,17 +10,17 @@
 --  THEORY
 -- =============================================================
 
--- ?? What are Derived Tables?
+--  What are Derived Tables?
 -- A Derived Table is a subquery written inside the FROM clause.
 -- It acts like a temporary table that exists only for the duration
 -- of that query. It is also known as an "inline view".
 
--- ?? Why use Derived Tables?
+--  Why use Derived Tables?
 -- - To simplify complex queries
 -- - To perform calculations and reuse them in outer queries
 -- - To avoid creating physical or temporary tables
 
--- ?? Syntax:
+--  Syntax:
 -- SELECT columns
 -- FROM (SELECT ... FROM ... WHERE ...) AS alias_name
 -- WHERE condition;
@@ -91,7 +91,7 @@ GO
 --  EXAMPLES
 -- =============================================================
 
--- 1?? Derived Table to calculate department-wise average salary
+-- 1. Derived Table to calculate department-wise average salary
 SELECT d.DeptName, avg_data.AvgSalary
 FROM (
     SELECT DeptID, AVG(Salary) AS AvgSalary
@@ -101,7 +101,7 @@ FROM (
 JOIN Departments d ON avg_data.DeptID = d.DeptID;
 GO
 
--- 2?? Derived Table to find employees earning above department average
+-- 2. Derived Table to find employees earning above department average
 SELECT e.EmpName, e.Salary, d.DeptName
 FROM Employees e
 JOIN Departments d ON e.DeptID = d.DeptID
@@ -112,7 +112,7 @@ WHERE e.Salary > (
 );
 GO
 
--- 3?? Derived Table for recent hires (last 2 years)
+-- 3. Derived Table for recent hires (last 2 years)
 SELECT EmpName, DeptName, HireDate
 FROM (
     SELECT e.EmpName, d.DeptName, e.HireDate
@@ -122,7 +122,7 @@ FROM (
 ) AS recent_employees;
 GO
 
--- 4?? Derived Table for Top 2 Salaries per Department
+-- 4. Derived Table for Top 2 Salaries per Department
 SELECT d.DeptName, t.EmpName, t.Salary
 FROM (
     SELECT EmpName, DeptID, Salary,
@@ -137,12 +137,12 @@ GO
 --  CHALLENGE QUERIES
 -- =============================================================
 
--- ?? 1. Find employees who earn more than the overall average salary
+-- 1. Find employees who earn more than the overall average salary
 SELECT EmpName, Salary
 FROM Employees
 WHERE Salary > (SELECT AVG(Salary) FROM Employees);
 
--- ?? 2. Using a derived table, show department names with total salary > 100000
+-- 2. Using a derived table, show department names with total salary > 100000
 SELECT d.DeptName, totals.TotalSalary
 FROM (
     SELECT DeptID, SUM(Salary) AS TotalSalary
@@ -152,7 +152,7 @@ FROM (
 JOIN Departments d ON totals.DeptID = d.DeptID
 WHERE totals.TotalSalary > 100000;
 
--- ?? 3. Using a derived table, count how many employees joined after 2021 per department
+-- 3. Using a derived table, count how many employees joined after 2021 per department
 SELECT d.DeptName, recent.CountEmp
 FROM (
     SELECT DeptID, COUNT(*) AS CountEmp
@@ -169,3 +169,4 @@ JOIN Departments d ON d.DeptID = recent.DeptID;
 --  - Useful for aggregations, filtering, and window functions
 --  - Simplify multi-step logic without using temp tables
 -- =============================================================
+
