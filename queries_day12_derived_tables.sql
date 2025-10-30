@@ -170,3 +170,4 @@ JOIN Departments d ON d.DeptID = recent.DeptID;
 --  - Simplify multi-step logic without using temp tables
 -- =============================================================
 
+
