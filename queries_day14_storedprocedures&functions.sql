@@ -1,5 +1,5 @@
 -- =============================================================
--- ?? DAY 13 – STORED PROCEDURES & FUNCTIONS
+--  DAY 14 â€“ STORED PROCEDURES & FUNCTIONS
 -- Author: Tanuja Mannem
 -- Description:
 --   Learn how to create, execute, and manage Stored Procedures 
@@ -7,41 +7,41 @@
 -- =============================================================
 
 -- =============================================================
--- ?? THEORY
+--  THEORY
 -- =============================================================
 
--- ?? What is a Stored Procedure?
+--  What is a Stored Procedure?
 -- A Stored Procedure is a precompiled block of SQL code 
 -- that can be executed multiple times.
 -- It helps to modularize code, improve performance, 
 -- and reduce repetitive SQL writing.
 
--- ? Benefits:
+--  Benefits:
 -- - Improves performance (precompiled)
 -- - Increases reusability
 -- - Supports parameters
 -- - Enhances security (controlled access)
 
--- ?? Syntax (SQL Server Style):
+--  Syntax (SQL Server Style):
 -- CREATE PROCEDURE procedure_name
 -- AS
 -- BEGIN
 --     SQL statements
 -- END;
 --
--- ?? With Parameters:
+--  With Parameters:
 -- CREATE PROCEDURE procedure_name @param1 datatype, @param2 datatype
 -- AS
 -- BEGIN
 --     SQL statements using parameters
 -- END;
 
--- ?? Execute:
+--  Execute:
 -- EXEC procedure_name;
 -- EXEC procedure_name @param1 = value1, @param2 = value2;
 
 -- =============================================================
--- ?? BASE TABLES
+--  BASE TABLES
 -- =============================================================
 DROP TABLE IF EXISTS Employees;
 DROP TABLE IF EXISTS Departments;
@@ -72,7 +72,7 @@ INSERT INTO Employees VALUES
 GO
 
 -- =============================================================
--- ?? 1?? CREATE SIMPLE STORED PROCEDURE
+--  1. CREATE SIMPLE STORED PROCEDURE
 -- =============================================================
 
 -- Procedure to display all employees
@@ -88,7 +88,7 @@ EXEC GetAllEmployees;
 GO
 
 -- =============================================================
--- ?? 2?? STORED PROCEDURE WITH PARAMETERS
+--  2. STORED PROCEDURE WITH PARAMETERS
 -- =============================================================
 
 -- Procedure to get employees by department
@@ -107,7 +107,7 @@ EXEC GetEmployeesByDept @DeptID = 3;
 GO
 
 -- =============================================================
--- ?? 3?? STORED PROCEDURE WITH INPUT + OUTPUT PARAMETERS
+--  3. STORED PROCEDURE WITH INPUT + OUTPUT PARAMETERS
 -- =============================================================
 
 -- Procedure to calculate total salary in a department
@@ -129,13 +129,13 @@ SELECT @SalarySum AS Total_Salary_For_Dept3;
 GO
 
 -- =============================================================
--- ?? 4?? CREATE USER-DEFINED FUNCTION (UDF)
+--  4. CREATE USER-DEFINED FUNCTION (UDF)
 -- =============================================================
 
--- ?? Functions return a single value or a table.
+--  Functions return a single value or a table.
 -- Used inside SELECT queries or other SQL statements.
 
--- Example 1: Scalar Function – Returns single value
+-- Example 1: Scalar Function â€“ Returns single value
 CREATE FUNCTION GetAnnualSalary (@MonthlySalary DECIMAL(10,2))
 RETURNS DECIMAL(10,2)
 AS
@@ -149,7 +149,7 @@ SELECT EmpName, Salary, dbo.GetAnnualSalary(Salary) AS AnnualSalary
 FROM Employees;
 GO
 
--- Example 2: Table-Valued Function – Returns a result set
+-- Example 2: Table-Valued Function â€“ Returns a result set
 CREATE FUNCTION GetHighEarners (@MinSalary DECIMAL(10,2))
 RETURNS TABLE
 AS
@@ -165,17 +165,17 @@ SELECT * FROM dbo.GetHighEarners(60000);
 GO
 
 -- =============================================================
--- ?? 5?? MODIFY / DELETE PROCEDURES AND FUNCTIONS
+--  5. MODIFY / DELETE PROCEDURES AND FUNCTIONS
 -- =============================================================
 -- ALTER PROCEDURE GetAllEmployees AS SELECT EmpID, EmpName FROM Employees;
 -- DROP PROCEDURE GetEmployeesByDept;
 -- DROP FUNCTION GetAnnualSalary;
 
 -- =============================================================
--- ?? CHALLENGE QUERIES
+--  CHALLENGE QUERIES
 -- =============================================================
 
--- 1?? Create a procedure that shows employees hired after 2021.
+-- 1. Create a procedure that shows employees hired after 2021.
 CREATE PROCEDURE GetRecentHires
 AS
 BEGIN
@@ -186,7 +186,7 @@ GO
 EXEC GetRecentHires;
 GO
 
--- 2?? Create a function that returns bonus (10% of salary)
+-- 2. Create a function that returns bonus (10% of salary)
 CREATE FUNCTION GetBonus(@Salary DECIMAL(10,2))
 RETURNS DECIMAL(10,2)
 AS
@@ -199,10 +199,11 @@ SELECT EmpName, Salary, dbo.GetBonus(Salary) AS Bonus FROM Employees;
 GO
 
 -- =============================================================
--- ? END OF DAY 13
+--  END OF DAY 14
 -- Key Learnings:
 -- - Created Stored Procedures (with and without parameters)
 -- - Created Scalar and Table-Valued Functions
 -- - Used EXEC and OUTPUT parameters
 -- - Practical mini exercises and reusable SQL modules
 -- =============================================================
+
