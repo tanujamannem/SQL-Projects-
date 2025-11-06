@@ -1,9 +1,9 @@
 -- =============================================================
---  DAY 14 � TRIGGERS IN SQL (FULL VERSION)
+--  DAY 15 – TRIGGERS IN SQL (FULL VERSION)
 --  Author: Tanuja Mannem
 --  Description:
 --    Learn all about SQL Triggers:
---    - What are triggers & why they�re useful
+--    - What are triggers & why they’re useful
 --    - DML, DDL, and LOGON triggers
 --    - BEFORE, AFTER, and INSTEAD OF triggers
 --    - Practical examples: Audit, Validation, Restriction
@@ -14,45 +14,45 @@
 --  THEORY
 -- =============================================================
 
--- ?? What is a Trigger?
+--  What is a Trigger?
 -- A TRIGGER is a special kind of stored procedure that automatically executes
 -- (fires) in response to specific database events such as INSERT, UPDATE, DELETE,
 -- or even schema changes and logons.
 
 -- Triggers help:
--- ? Enforce business rules
--- ? Maintain audit trails
--- ? Prevent invalid transactions
--- ? Automate actions after data changes
+--  Enforce business rules
+--  Maintain audit trails
+--  Prevent invalid transactions
+--  Automate actions after data changes
 
 -- =============================================================
 --  TYPES OF TRIGGERS
 -- =============================================================
 
--- 1?? DML TRIGGERS (Data Manipulation Language)
+-- 1. DML TRIGGERS (Data Manipulation Language)
 -- Triggered by data changes (INSERT, UPDATE, DELETE).
 -- Can be AFTER, BEFORE, or INSTEAD OF the DML action.
 
--- 2?? DDL TRIGGERS (Data Definition Language)
+-- 2. DDL TRIGGERS (Data Definition Language)
 -- Triggered by schema changes (CREATE, ALTER, DROP).
 
--- 3?? LOGON TRIGGERS
+-- 3. LOGON TRIGGERS
 -- Fired when a user logs into the database (used for auditing or limiting connections).
 
 -- =============================================================
 --  TYPES BASED ON EXECUTION TIME
 -- =============================================================
 
--- ?? BEFORE Trigger:
+--  BEFORE Trigger:
 --     Executes before the DML statement.
 --     Used to validate or modify data before insert/update.
 --     (Supported in MySQL, not SQL Server)
 
--- ?? AFTER Trigger:
+--  AFTER Trigger:
 --     Executes after the DML statement.
 --     Used for auditing, logging, cascading changes.
 
--- ?? INSTEAD OF Trigger:
+--  INSTEAD OF Trigger:
 --     Executes instead of the triggering statement.
 --     Commonly used on views.
 
@@ -100,7 +100,7 @@ GO
 -- 2. AFTER TRIGGERS (DML)
 -- =============================================================
 
--- ?? Trigger: After UPDATE
+--  Trigger: After UPDATE
 CREATE TRIGGER trg_AfterUpdateSalary
 ON Employees
 AFTER UPDATE
@@ -129,7 +129,7 @@ SELECT * FROM EmployeeAudit;
 GO
 
 
--- ?? Trigger: After DELETE
+--  Trigger: After DELETE
 CREATE TRIGGER trg_AfterDeleteEmployee
 ON Employees
 AFTER DELETE
@@ -148,7 +148,7 @@ SELECT * FROM EmployeeAudit;
 GO
 
 
--- ?? Trigger: After INSERT
+--  Trigger: After INSERT
 CREATE TRIGGER trg_AfterInsertEmployee
 ON Employees
 AFTER INSERT
@@ -220,7 +220,7 @@ GO
 -- 5. LOGON TRIGGER (for auditing connections)
 -- =============================================================
 
--- ?? These triggers run when a user logs into SQL Server.
+--  These triggers run when a user logs into SQL Server.
 --    Typically used by DBAs for security and auditing.
 
 -- NOTE: Run only if you have admin rights.
@@ -238,7 +238,7 @@ GO
 -- =============================================================
 -- 6. BEFORE TRIGGER (Example for MySQL users)
 -- =============================================================
--- ?? SQL Server does NOT support BEFORE triggers.
+--  SQL Server does NOT support BEFORE triggers.
 -- Below example is valid for MySQL syntax only.
 
 -- CREATE TRIGGER trg_BeforeInsert
@@ -270,23 +270,104 @@ ENABLE TRIGGER trg_AfterUpdateSalary ON Employees;
 -- DROP TRIGGER trg_DDL_Activity;
 GO
 
+-- =============================================================
+--  CHALLENGE QUERIES – TRIGGERS
+-- =============================================================
+
+-- 1️⃣ Create a trigger that prevents deleting employees from the HR department.
+CREATE TRIGGER trg_PreventHRDelete
+ON Employees
+INSTEAD OF DELETE
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1 FROM deleted d
+        JOIN Departments dep ON d.DeptID = dep.DeptID
+        WHERE dep.DeptName = 'HR'
+    )
+    BEGIN
+        PRINT '❌ Cannot delete employees from HR department.';
+        ROLLBACK TRANSACTION;
+    END
+    ELSE
+    BEGIN
+        DELETE FROM Employees
+        WHERE EmpID IN (SELECT EmpID FROM deleted);
+    END
+END;
+GO
+
+-- Test
+DELETE FROM Employees WHERE DeptID = 1; -- HR department
+GO
+
+
+-- 2️⃣ Create a trigger that logs INSERT, UPDATE, and DELETE into one audit table.
+CREATE TRIGGER trg_LogAllActions
+ON Employees
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    -- Log inserted records
+    INSERT INTO Employee_Audit (ActionType, EmpID, EmpName, Salary)
+    SELECT 'INSERT', EmpID, EmpName, Salary FROM inserted;
+
+    -- Log deleted records
+    INSERT INTO Employee_Audit (ActionType, EmpID, EmpName, Salary)
+    SELECT 'DELETE', EmpID, EmpName, Salary FROM deleted;
+END;
+GO
+
+-- Test
+INSERT INTO Employees (EmpName, DeptID, Salary)
+VALUES ('Esha', 2, 67000);
+DELETE FROM Employees WHERE EmpName = 'Esha';
+GO
+
+SELECT * FROM Employee_Audit;
+GO
+
+
+-- 3️⃣ Modify the salary update trigger to prevent salary > 1,00,000.
+CREATE TRIGGER trg_SalaryLimit
+ON Employees
+AFTER UPDATE
+AS
+BEGIN
+    IF EXISTS (SELECT 1 FROM inserted WHERE Salary > 100000)
+    BEGIN
+        PRINT '❌ Salary cannot exceed 1,00,000!';
+        ROLLBACK TRANSACTION;
+    END
+END;
+GO
+
+-- Test
+UPDATE Employees SET Salary = 120000 WHERE EmpName = 'Divya';
+GO
+
+
+-- 4️⃣ Create a DDL trigger that alerts whenever someone drops a table.
+CREATE TRIGGER trg_PreventDrop
+ON DATABASE
+FOR DROP_TABLE
+AS
+BEGIN
+    PRINT '⚠️ Warning: A DROP TABLE command was executed!';
+END;
+GO
+
+-- Test (uncomment to check)
+-- DROP TABLE Employees;
+
 
 -- =============================================================
---  CHALLENGE QUERIES
--- =============================================================
-
--- 1?? Create a trigger that prevents deleting employees from the HR department.
--- 2?? Create a trigger that logs INSERT, UPDATE, and DELETE into one audit table.
--- 3?? Modify the salary update trigger to prevent salary > 1,00,000.
--- 4?? Create a DDL trigger that alerts whenever someone drops a table.
-
-
--- =============================================================
---  END OF DAY 14
+--  END OF DAY 15
 --  KEY LEARNINGS:
---  ? Understood DML, DDL, and LOGON triggers
---  ? Practiced AFTER, BEFORE, and INSTEAD OF triggers
---  ? Used inserted/deleted pseudo-tables for tracking changes
---  ? Logged audit details for INSERT, UPDATE, DELETE
---  ? Prevented unwanted transactions and enforced rules
+--   Understood DML, DDL, and LOGON triggers
+--   Practiced AFTER, BEFORE, and INSTEAD OF triggers
+--   Used inserted/deleted pseudo-tables for tracking changes
+--   Logged audit details for INSERT, UPDATE, DELETE
+--   Prevented unwanted transactions and enforced rules
 -- =============================================================
+
