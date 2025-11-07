@@ -1,5 +1,5 @@
 -- =============================================================
---  DAY 15 – INDEXES & PERFORMANCE OPTIMIZATION
+--  DAY 16 â€“ INDEXES & PERFORMANCE OPTIMIZATION
 --  Author: Tanuja Mannem
 --  Description:
 --     Learn about indexes, clustered/non-clustered types,
@@ -14,17 +14,17 @@
 -- What are Indexes?
 -- -------------------------------------------------------------
 -- Indexes are special lookup tables that SQL Server uses
--- to speed up data retrieval. They work like an index in a book —
+-- to speed up data retrieval. They work like an index in a book â€”
 -- instead of scanning the entire table, SQL can go directly
 -- to the relevant rows.
 
 -- Types of Indexes:
--- 1?? Clustered Index
+-- 1. Clustered Index
 --     - Physically sorts and stores the rows in the table.
 --     - Each table can have only ONE clustered index.
 --     - Default on PRIMARY KEY columns.
 --
--- 2?? Non-Clustered Index
+-- 2. Non-Clustered Index
 --     - Creates a separate structure that points to the data.
 --     - You can have multiple non-clustered indexes.
 --
@@ -33,12 +33,12 @@
 --     CREATE NONCLUSTERED INDEX index_name ON table_name(column);
 
 -- Benefits of Indexes:
--- ? Faster SELECT queries.
--- ? Useful in JOINs, WHERE, ORDER BY clauses.
+--  Faster SELECT queries.
+--  Useful in JOINs, WHERE, ORDER BY clauses.
 --
 -- Drawbacks:
--- ?? Slower INSERT/UPDATE/DELETE because index must also update.
--- ?? Takes extra storage space.
+--  Slower INSERT/UPDATE/DELETE because index must also update.
+--  Takes extra storage space.
 
 
 -- =============================================================
@@ -75,7 +75,7 @@ GO
 -- =============================================================
 
 -- Clustered index automatically exists on PRIMARY KEY (SaleID)
--- Let’s verify:
+-- Letâ€™s verify:
 EXEC sp_helpindex 'Sales';
 GO
 
@@ -144,36 +144,37 @@ GO
 --  CHALLENGE QUERIES
 -- =============================================================
 
--- 1?? Create an index on SaleDate and run a query filtering by date.
+-- 1. Create an index on SaleDate and run a query filtering by date.
 CREATE NONCLUSTERED INDEX idx_SaleDate
 ON Sales(SaleDate);
 
 SELECT * FROM Sales WHERE SaleDate > '2023-04-01';
 
 
--- 2?? Create a composite index on (CustomerName, ProductName)
+-- 2. Create a composite index on (CustomerName, ProductName)
 CREATE NONCLUSTERED INDEX idx_Customer_Product
 ON Sales(CustomerName, ProductName);
 
 
--- 3?? Drop an index and observe performance impact.
+-- 3. Drop an index and observe performance impact.
 DROP INDEX idx_Customer_Product ON Sales;
 
 
--- 4?? Use an index to sort data faster.
+-- 4. Use an index to sort data faster.
 SELECT * FROM Sales ORDER BY ProductName;
 
 
--- 5?? View all existing indexes again.
+-- 5. View all existing indexes again.
 EXEC sp_helpindex 'Sales';
 GO
 
 
 -- =============================================================
---  END OF DAY 15
+--  END OF DAY 16
 --  Key Learnings:
---  ? Understood clustered vs non-clustered indexes
---  ? Created single & composite indexes
---  ? Checked index impact using STATISTICS IO
---  ? Practiced dropping and optimizing indexes
+--   Understood clustered vs non-clustered indexes
+--   Created single & composite indexes
+--   Checked index impact using STATISTICS IO
+--  Practiced dropping and optimizing indexes
 -- =============================================================
+
