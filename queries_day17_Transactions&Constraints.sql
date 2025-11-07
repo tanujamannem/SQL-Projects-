@@ -1,5 +1,5 @@
 -- =============================================================
--- ?? DAY 16 – TRANSACTIONS & CONSTRAINTS
+--  DAY 17 â€“ TRANSACTIONS & CONSTRAINTS
 -- Author: Tanuja Mannem
 -- Description:
 --   Learn how to manage transactions using COMMIT, ROLLBACK, and SAVEPOINT.
@@ -7,26 +7,26 @@
 -- =============================================================
 
 -- =============================================================
--- ?? THEORY
+--  THEORY
 -- =============================================================
 
--- ?? What are Transactions?
+--  What are Transactions?
 -- A transaction is a sequence of SQL operations performed as a single logical unit of work.
 -- It ensures that either all operations succeed (COMMIT) or none take effect (ROLLBACK).
 
--- ? ACID Properties:
---  A — Atomicity: All or nothing.
---  C — Consistency: Data must be in a valid state before and after transaction.
---  I — Isolation: Concurrent transactions don’t affect each other.
---  D — Durability: Once committed, changes persist even after a crash.
+--  ACID Properties:
+--  A â€” Atomicity: All or nothing.
+--  C â€” Consistency: Data must be in a valid state before and after transaction.
+--  I â€” Isolation: Concurrent transactions donâ€™t affect each other.
+--  D â€” Durability: Once committed, changes persist even after a crash.
 
--- ?? Transaction Control Commands:
+--  Transaction Control Commands:
 --  BEGIN TRAN / START TRANSACTION ? Starts a new transaction.
 --  COMMIT ? Saves the changes permanently.
 --  ROLLBACK ? Undoes changes since the last COMMIT.
 --  SAVEPOINT ? Marks a point within a transaction to roll back to.
 
--- ?? Constraints ensure data validity and integrity:
+--  Constraints ensure data validity and integrity:
 --  - PRIMARY KEY ? Uniquely identifies each record.
 --  - FOREIGN KEY ? Enforces relationship between two tables.
 --  - UNIQUE ? Ensures all values in a column are different.
@@ -35,7 +35,7 @@
 --  - DEFAULT ? Assigns a default value when none is provided.
 
 -- =============================================================
--- ?? CLEAN START
+--  CLEAN START
 -- =============================================================
 
 DROP TABLE IF EXISTS Orders;
@@ -43,7 +43,7 @@ DROP TABLE IF EXISTS Customers;
 GO
 
 -- =============================================================
--- 1?? CREATE TABLES WITH CONSTRAINTS
+-- 1. CREATE TABLES WITH CONSTRAINTS
 -- =============================================================
 
 CREATE TABLE Customers (
@@ -64,7 +64,7 @@ CREATE TABLE Orders (
 GO
 
 -- =============================================================
--- 2?? INSERT SAMPLE DATA
+-- 2. INSERT SAMPLE DATA
 -- =============================================================
 
 INSERT INTO Customers VALUES
@@ -80,7 +80,7 @@ INSERT INTO Orders VALUES
 GO
 
 -- =============================================================
--- 3?? TRANSACTIONS – COMMIT & ROLLBACK
+-- 3. TRANSACTIONS â€“ COMMIT & ROLLBACK
 -- =============================================================
 
 BEGIN TRANSACTION;
@@ -100,7 +100,7 @@ SELECT * FROM Orders;
 GO
 
 -- =============================================================
--- 4?? SAVEPOINT USAGE
+-- 4. SAVEPOINT USAGE
 -- =============================================================
 
 BEGIN TRANSACTION;
@@ -118,17 +118,17 @@ SELECT * FROM Orders;
 GO
 
 -- =============================================================
--- 5?? CONSTRAINT EXAMPLES
+-- 5. CONSTRAINT EXAMPLES
 -- =============================================================
 
--- ?? NOT NULL Violation
+--  NOT NULL Violation
 -- INSERT INTO Customers (CustomerID, CustomerName, Email, City)
--- VALUES (4, NULL, 'new@gmail.com', 'Goa');  -- ? Error: NOT NULL constraint
+-- VALUES (4, NULL, 'new@gmail.com', 'Goa');  --  Error: NOT NULL constraint
 
--- ?? CHECK Constraint Violation
--- INSERT INTO Orders VALUES (105, 1, '2024-03-25', -1000); -- ? Error
+--  CHECK Constraint Violation
+-- INSERT INTO Orders VALUES (105, 1, '2024-03-25', -1000); --  Error
 
--- ?? DEFAULT value example
+--  DEFAULT value example
 INSERT INTO Customers (CustomerID, CustomerName, Email)
 VALUES (4, 'Esha Kapoor', 'esha@gmail.com');  -- City defaults to 'Unknown'
 
@@ -136,34 +136,35 @@ SELECT * FROM Customers;
 GO
 
 -- =============================================================
--- 6?? CHALLENGE QUERIES
+-- 6. CHALLENGE QUERIES
 -- =============================================================
 
--- 1?? Create a savepoint before deleting data, then rollback to it.
+-- 1. Create a savepoint before deleting data, then rollback to it.
 BEGIN TRANSACTION;
 DELETE FROM Orders WHERE Amount < 2000;
 SAVE TRANSACTION BeforeRollback;
 ROLLBACK TRANSACTION BeforeRollback;
 COMMIT;
 
--- 2?? Try violating UNIQUE constraint.
+-- 2. Try violating UNIQUE constraint.
 -- INSERT INTO Customers VALUES (5, 'Farhan', 'amit@gmail.com', 'Hyderabad'); -- ? Error: duplicate email
 
--- 3?? Add a new CHECK constraint on Orders to ensure Amount <= 10000.
+-- 3. Add a new CHECK constraint on Orders to ensure Amount <= 10000.
 ALTER TABLE Orders ADD CONSTRAINT chk_MaxAmount CHECK (Amount <= 10000);
 
--- 4?? Test CHECK constraint.
+-- 4. Test CHECK constraint.
 -- INSERT INTO Orders VALUES (106, 2, '2024-03-28', 15000); -- ? Error: violates constraint
 
--- 5?? Verify all valid records
+-- 5. Verify all valid records
 SELECT * FROM Orders;
 GO
 
 -- =============================================================
--- ? END OF DAY 16
+--  END OF DAY 17
 -- Key Learnings:
 -- - Understood ACID properties & transaction control commands.
 -- - Practiced COMMIT, ROLLBACK, and SAVEPOINT.
 -- - Created and applied various SQL constraints.
 -- - Learned to maintain data integrity and consistency.
 -- =============================================================
+
