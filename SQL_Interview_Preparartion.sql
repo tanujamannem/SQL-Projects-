@@ -69,7 +69,7 @@
 -- 1NF – Eliminate repeating groups.
 -- 2NF – Eliminate partial dependency.
 -- 3NF – Eliminate transitive dependency.
--- BCNF – Stronger version of 3NF.
+-- BCNF (Boyce-Codd Normal Form) – Stronger version of 3NF.
 
 -- =============================================================
 --  INTERMEDIATE SQL
@@ -1081,4 +1081,5 @@ FROM Employees;
 DROP TABLE IF EXISTS #IT_Employees;
 DROP TABLE IF EXISTS Salary_Audit;
 DROP TABLE IF EXISTS DDL_Audit;
+
 
