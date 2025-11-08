@@ -60,7 +60,7 @@
 -- Example:
 -- FOREIGN KEY (DeptID) REFERENCES Departments(DeptID);
 
-9. What is a composite key?.
+9. What is a composite key?
 -- A key made up of two or more columns that uniquely identify a record.
 
 10. What is normalization?
@@ -78,12 +78,12 @@
 11. What is a JOIN? Explain types.
 -- A JOIN combines data from multiple tables using related columns.
 -- Types:
--- - INNER JOIN ? Returns only matching rows.
--- - LEFT JOIN ? All from left + matching from right.
--- - RIGHT JOIN ? All from right + matching from left.
--- - FULL JOIN ? All rows when there is a match in either table.
--- - CROSS JOIN ? Cartesian product of two tables.
--- - SELF JOIN ? Join table with itself.
+-- - INNER JOIN : Returns only matching rows.
+-- - LEFT JOIN : All from left + matching from right.
+-- - RIGHT JOIN : All from right + matching from left.
+-- - FULL JOIN : All rows when there is a match in either table.
+-- - CROSS JOIN : Cartesian product of two tables.
+-- - SELF JOIN : Join table with itself.
 
 12. What is the difference between WHERE and HAVING?
 -- WHERE filters rows before aggregation.
@@ -1081,5 +1081,6 @@ FROM Employees;
 DROP TABLE IF EXISTS #IT_Employees;
 DROP TABLE IF EXISTS Salary_Audit;
 DROP TABLE IF EXISTS DDL_Audit;
+
 
 
