@@ -135,7 +135,7 @@
 -- Global temp :##TempTable (visible to all sessions)
 
 22. What are derived tables?
--- Inline subqueries in the FROM clause.
+-- subqueries in the FROM clause.
 -- Example:
 -- SELECT * FROM 
 --(SELECT EmpID, Salary FROM Employees) AS Temp;
@@ -1085,6 +1085,7 @@ FROM Employees;
 DROP TABLE IF EXISTS #IT_Employees;
 DROP TABLE IF EXISTS Salary_Audit;
 DROP TABLE IF EXISTS DDL_Audit;
+
 
 
 
