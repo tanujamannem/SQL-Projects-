@@ -90,8 +90,8 @@
 -- HAVING filters groups after aggregation.
 
 13. What is the difference between UNION and UNION ALL?
--- UNION ? Combines results and removes duplicates.
--- UNION ALL ? Combines results without removing duplicates.
+-- UNION : Combines results with select statements and removes duplicates.
+-- UNION ALL : Combines results with select statements without removing duplicates.
 
 14. What is a subquery?
 -- A query inside another query.
@@ -126,22 +126,25 @@
 20. What is a view?
 -- A virtual table based on a SQL query.
 -- Example:
--- CREATE VIEW ActiveEmployees AS SELECT * FROM Employees WHERE Status='Active';
+-- CREATE VIEW ActiveEmployees AS 
+--SELECT * FROM Employees WHERE Status='Active';
 
 21. What are temporary tables?
 -- Tables created for temporary data storage.
--- Local temp ? #TempTable (session-specific)
--- Global temp ? ##TempTable (visible to all sessions)
+-- Local temp : #TempTable (session-specific)
+-- Global temp :##TempTable (visible to all sessions)
 
 22. What are derived tables?
 -- Inline subqueries in the FROM clause.
 -- Example:
--- SELECT * FROM (SELECT EmpID, Salary FROM Employees) AS Temp;
+-- SELECT * FROM 
+--(SELECT EmpID, Salary FROM Employees) AS Temp;
 
 23. What are stored procedures?
 -- Precompiled SQL blocks used to perform operations.
 -- Example:
--- CREATE PROCEDURE GetAllEmployees AS SELECT * FROM Employees;
+-- CREATE PROCEDURE GetAllEmployees AS 
+--SELECT * FROM Employees;
 
 24. What are functions?
 -- Return a single value and can be used inside SELECT statements.
@@ -161,11 +164,12 @@
 -- COMMIT, ROLLBACK, SAVEPOINT.
 
 27. What is ACID property?
--- Ensures transaction reliability.
--- A – Atomicity
--- C – Consistency
--- I – Isolation
--- D – Durability
+-- Ensures data integrity, prevents partial updates,
+-- and keeps database reliable during failures.
+-- A – Atomicity : All or nothing (complete or rollback)
+-- C – Consistency : Maintains valid database state
+-- I – Isolation : Each transaction runs independently
+-- D – Durability : Committed data is permanent
 
 28. What are constraints and their types?
 -- Rules applied to ensure valid data.
@@ -178,7 +182,7 @@
 -- - Limit subqueries
 -- - Use proper joins
 
-30. What is a trigger vs stored procedure?
+30. What is the difference between trigger and stored procedure?
 -- Trigger : automatic, can’t be called manually.
 -- Procedure : manually invoked.
 
@@ -1081,6 +1085,7 @@ FROM Employees;
 DROP TABLE IF EXISTS #IT_Employees;
 DROP TABLE IF EXISTS Salary_Audit;
 DROP TABLE IF EXISTS DDL_Audit;
+
 
 
 
