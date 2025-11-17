@@ -204,12 +204,12 @@
 -- LEFT JOIN : All rows from left + matching from right.
 
 34. What is difference between correlated and non-correlated subquery?
--- Non-Correlated Subquery: Does not depend on the outer query.
--- Executes only once for the entire SQL statement.
--- Outer query uses the single result returned by the subquery.
 -- Correlated Subquery: Depends on the outer query.
 -- Executes once for every row of the outer query.
 -- Inner query uses values from the outer query.
+-- Non-Correlated Subquery: Does not depend on the outer query.
+-- Executes only once for the entire SQL statement.
+-- Outer query uses the single result returned by the subquery.
 
 35. What is difference between CHAR and VARCHAR?
 -- CHAR is fixed-length; VARCHAR is variable-length.
@@ -1080,6 +1080,7 @@ FROM Employees;
 DROP TABLE IF EXISTS #IT_Employees;
 DROP TABLE IF EXISTS Salary_Audit;
 DROP TABLE IF EXISTS DDL_Audit;
+
 
 
 
