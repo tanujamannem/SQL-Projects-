@@ -114,7 +114,7 @@
 -- ROW_NUMBER(), RANK(), DENSE_RANK(), LAG(), LEAD(), SUM() OVER()
 
 18. What is the difference between RANK() and DENSE_RANK()?
--- RANK() leaves gaps in ranking after ties.
+-- RANK() leaves gaps in ranking.
 -- DENSE_RANK() does not leave gaps.
 
 19. What are indexes in SQL?
@@ -1076,6 +1076,7 @@ FROM Employees;
 DROP TABLE IF EXISTS #IT_Employees;
 DROP TABLE IF EXISTS Salary_Audit;
 DROP TABLE IF EXISTS DDL_Audit;
+
 
 
 
