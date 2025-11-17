@@ -480,15 +480,6 @@
 -- Up-to-date statistics improve query performance.
 
 -- =============================================================
---  SQL INTERVIEW PREPARATION – THEORY QUESTIONS (101–150)
--- Author: Tanuja Mannem
--- Description:
---   Advanced SQL interview theory questions with detailed answers.
---   Covers indexing internals, performance tuning, optimization,
---   execution plans, security, and tricky real-world scenarios.
--- =============================================================
-
--- =============================================================
 --  PERFORMANCE TUNING & OPTIMIZATION
 -- =============================================================
 
@@ -1085,6 +1076,7 @@ FROM Employees;
 DROP TABLE IF EXISTS #IT_Employees;
 DROP TABLE IF EXISTS Salary_Audit;
 DROP TABLE IF EXISTS DDL_Audit;
+
 
 
 
