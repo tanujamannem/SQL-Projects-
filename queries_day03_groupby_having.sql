@@ -145,10 +145,11 @@ FROM sales
 GROUP BY region
 ORDER BY total_revenue DESC;
 
---  Find product-wise total revenue and filter only those earning > ?3,00,000
+--  Find product-wise total revenue and filter only those earning > 3,00,000
 SELECT product, SUM(quantity * price) AS total_revenue
 FROM sales
 GROUP BY product
 HAVING SUM(quantity * price) > 300000;
+
 
 
