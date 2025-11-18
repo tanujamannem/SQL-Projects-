@@ -177,8 +177,3 @@ WHERE dept_id IN (
     GROUP BY dept_id
     HAVING AVG(salary) > 50000
 );
-
-
-
-
-
